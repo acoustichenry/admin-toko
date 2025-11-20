@@ -3,7 +3,7 @@ const router = express.Router();
 const connection = require('../config/db');
 
 router.get('/get-product', (req, res) => {
-    connection.query('SELECT * FROM product', (err, rows) => {
+    connection.query('SELECT * FROM product order by id_produk desc', (err, rows) => {
         if (err) {
             return res.status(500).json({ message: 'Error fetching products' });
         }
@@ -83,11 +83,11 @@ router.get('/get-product-by-id/:id_produk', (req, res) => {
 });
 
 router.get('/stock-product', (req, res) => {
-    connection.query('SELECT * FROM stocks', (err, result) => {
+    connection.query('SELECT * FROM product_stock order by last_update desc', (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Error fetching stock product' });
         }
-        res.json(result);
+        res.status(200).json({ message: 'Stock product fetched successfully', data: result });
     });
 });
 

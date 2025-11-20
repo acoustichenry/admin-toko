@@ -3,13 +3,14 @@ const router = express.Router();
 const connection = require('../config/db');
 
 router.get('/get-purchasing', (req, res) => {
-    connection.query('SELECT * FROM purchasing', (err, rows) => {
+    connection.query('SELECT * FROM purchasing order by id_pembelian desc', (err, rows) => {
         if (err) {
             return res.status(500).json({ message: 'Error fetching purchasing: ' + err.message });
         }
-        res.status(200).json({ message: 'Purchasing fetched successfully', data: rows });
+        return res.status(200).json({ message: 'Purchasing fetched successfully', data: rows });
     });
 });
+
 
 router.post('/create-purchasing', (req, res) => {
     const { id_pembelian = 0, id_produk = 0, jumlah = 0, harga_beli = 0, status = 0 } = req.body;
@@ -17,17 +18,36 @@ router.post('/create-purchasing', (req, res) => {
         if (err) {
             return res.status(500).json({ message: 'Error creating purchasing: ' + err.message });
         }
-        res.status(200).json({ message: 'Purchasing created successfully', data: req.body });
+    });
+
+    connection.query('UPDATE product_stock SET stok = stok - ? WHERE id_produk = ?', [jumlah, id_produk], (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error updating product stock: ' + err.message + ' id_produk: ' + id_produk });
+        }
+    });
+    
+    connection.query('SELECT stok FROM product_stock WHERE id_produk = ?', [id_produk], (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error fetching id_stok: ' + err.message });
+        }
+    });
+
+    const joinSql = `SELECT MAX(p.id_pembelian) AS id_pembelian, p.id_produk, p.jumlah, p.harga_beli, p.status, s.stok AS current_stok FROM purchasing p JOIN product_stock s ON p.id_produk = s.id_produk WHERE p.id_produk = ?`;
+    connection.query(joinSql, [id_produk], (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error fetching join sql: ' + err.message });
+        }
+        return res.status(200).json({ message: 'Purchasing created successfully', data: result[0] });
     });
 });
 
-router.put('/update-purchasing/:id_pembelian', (req, res) => {    
+router.put('/update-purchasing/:id_pembelian', (req, res) => {
     const { id_pembelian } = req.params;
-    const { id_produk = 0, jumlah = 0, harga_beli = 0, status = 0 } = req.body;   
+    const { id_produk = 0, jumlah = 0, harga_beli = 0, status = 0 } = req.body;
 
-    connection.query('UPDATE purchasing SET id_pembelian = ?, id_produk = ?, jumlah = ?, harga_beli = ?, status = ? WHERE id_pembelian = ?', [id_pembelian, id_produk, jumlah, harga_beli, status, id_pembelian], (err, result) => {    
+    connection.query('UPDATE purchasing SET id_pembelian = ?, id_produk = ?, jumlah = ?, harga_beli = ?, status = ? WHERE id_pembelian = ?', [id_pembelian, id_produk, jumlah, harga_beli, status, id_pembelian], (err, result) => {
         if (err) {
-            return res.status(500).json({ message: 'Error updating purchasing: ' + err.message + ' id_pembelian: ' + id_pembelian });  
+            return res.status(500).json({ message: 'Error updating purchasing: ' + err.message + ' id_pembelian: ' + id_pembelian });
         }
         res.status(200).json({ message: 'Purchasing updated successfully', data: req.body });
     });
