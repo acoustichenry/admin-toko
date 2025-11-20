@@ -8,8 +8,11 @@ const port = 2727
 require('dotenv').config();
 
 const cors = require('cors')
-
 app.use(cors())
+
+const productsRouter = require('./routes/products')
+const purchasingRouter = require('./routes/purchasing')
+
 
 const bodyParser = require('body-parser')
 
@@ -19,10 +22,13 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.send({
-        message: 'vue express api 1.0',
-    }
-    )
+        message: 'admin toko express api 1.0',
+    })
 })
+
+app.use('/api/v1/products', productsRouter);
+app.use('/api/v1/purchasing', purchasingRouter);
+
 
 
 app.set('port', process.env.PORT || port);
