@@ -1,10 +1,7 @@
-
-
 const express = require('express')
 const app = express()
+const path = require('path')
 
-const productsRouter = require('./routes/products')
-const purchasingRouter = require('./routes/purchasing')
 
 const address = '0.0.0.0'
 const port = 2727
@@ -18,10 +15,38 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// Static folder (CSS, JS)
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
+// Set EJS
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+app.use((req, res, next) => {
+    res.setHeader(
+      "Content-Security-Policy",
+      "default-src 'self'; connect-src 'self' http://localhost:2727 http://localhost:3000 ws://localhost:3000 https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:;"
+    );
+    next();
+  });
+  
+
+
+//routes view
+const indexRoute = require('./routes/index');
+const productViewRoute = require('./routes/productView');
+
+app.use('/', indexRoute);
+app.use('/products', productViewRoute);
+
+
+//route api
+const productsRouter = require('./routes/products')
+const purchasingRouter = require('./routes/purchasing')
+
+app.get('/api/v1', (req, res) => {
     res.send({
-        message: 'admin toko express api 1.0',
+        message: 'admin toko express api 0.1',
     })
 })
 

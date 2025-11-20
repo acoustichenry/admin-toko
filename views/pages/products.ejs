@@ -1,0 +1,31 @@
+<%- include('../layouts/main', { title: title, body: ` <h1>Daftar Produk</h1>
+
+    <ul>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+        
+        <tbody>
+            ${products
+            .map(product => `
+            <tr>
+                <td>${product.nama_produk}</td>
+                <td>Rp. ${product.harga.toLocaleString('id-ID')}</td>
+                <td>${product.deskripsi}</td>
+                <td>
+                    <a href="/products/edit/${product.id_produk}">Edit</a> 
+                    | 
+                    <a href="/products/delete/${product.id_produk}">Delete</a>
+                </td>
+            </tr>`)
+            .join('')
+            }
+        </tbody>
+        </table>
+        ` }) %>
