@@ -2,23 +2,22 @@
 
 const express = require('express')
 const app = express()
-const address = '0.0.0.0'
-const port = 2727
-
-require('dotenv').config();
-
-const cors = require('cors')
-app.use(cors())
 
 const productsRouter = require('./routes/products')
 const purchasingRouter = require('./routes/purchasing')
 
-
+const address = '0.0.0.0'
+const port = 2727
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
-app.use(bodyParser.urlencoded({ extended: false }))
+require('dotenv').config()
+
+app.use(cors())
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 
 app.get('/', (req, res) => {
     res.send({
