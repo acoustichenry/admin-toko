@@ -12,14 +12,20 @@ exports.listProducts = (req, res) => {
 
 
 exports.addProducts = (req, res) => {
-    res.render('pages/addProducts',{
+    res.render('pages/addProducts', {
         title: "Add Produk"
     })
+}
+
+exports.submitProducts = (req, res) => {
+    console.log(req.body);
+    res.send('data received')
+
 }
 
 exports.editProducts = (req, res) => {
     res.render('pages/editProducts', {
         title: "Edit Products "
     })
-    
+
 }

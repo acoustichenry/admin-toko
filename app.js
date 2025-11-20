@@ -35,9 +35,11 @@ app.use((req, res, next) => {
 //routes view
 const indexRoute = require('./routes/index');
 const productViewRoute = require('./routes/productView');
+const purchasingViewRoute = require('./routes/purchasingView')
 
 app.use('/', indexRoute);
 app.use('/products', productViewRoute);
+app.use('/purchasing', purchasingViewRoute)
 
 
 //route api

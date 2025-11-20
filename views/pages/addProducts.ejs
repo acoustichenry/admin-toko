@@ -1,6 +1,24 @@
 <%- include('../layouts/main', { title: title, body: ` <h1>Add Produk</h1>
 
-    <h1>Add products</h1>
-    
+    <h1>edit products</h1>
+    <form action="/products/add" method="POST">
+
+        <div>
+            <label>Product Name</label>
+            <input type="text" name="name" required>
+        </div>
+
+        <div>
+            <label>Price</label>
+            <input type="number" name="price" required>
+        </div>
+
+        <div>
+            <label>Stock</label>
+            <input type="number" name="stock" required>
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
 
     `}) %>

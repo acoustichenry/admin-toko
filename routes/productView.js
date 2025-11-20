@@ -9,4 +9,6 @@ router.get('/edit', productController.editProducts);
 
 router.get('/add', productController.addProducts);
 
+router.post('/submitProduct', productController.submitProducts);
+
 module.exports = router;
