@@ -3,7 +3,7 @@ const router = express.Router();
 const connection = require('../config/db');
 
 router.get('/get-purchasing', (req, res) => {
-    connection.query('SELECT p.id_pembelian, p.harga_beli, p.tanggal, p.jumlah, p.status, s.nama_produk, s.kategori FROM purchasing p JOIN product s ON p.id_produk = s.id_produk order by p.id_pembelian desc', (err, rows) => {
+    connection.query('SELECT p.id_pembelian, p.harga_beli, p.tanggal, p.jumlah, p.status, p.tanggal_batal_pembelian, s.nama_produk, s.kategori FROM purchasing p JOIN product s ON p.id_produk = s.id_produk order by p.id_pembelian desc', (err, rows) => {
         if (err) {
             return res.status(500).json({ message: 'Error fetching purchasing: ' + err.message }); s
         }

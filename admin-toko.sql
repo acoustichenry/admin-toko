@@ -11,7 +11,7 @@
  Target Server Version : 100427
  File Encoding         : 65001
 
- Date: 21/11/2025 11:09:00
+ Date: 21/11/2025 11:17:11
 */
 
 SET NAMES utf8mb4;
@@ -96,9 +96,9 @@ CREATE TABLE `purchasing`  (
 -- ----------------------------
 -- Records of purchasing
 -- ----------------------------
-INSERT INTO `purchasing` VALUES (1, 1, 10, 300000, '2025-11-20 23:19:04', '2', NULL);
-INSERT INTO `purchasing` VALUES (2, 5, 10, 300000, '2025-11-20 23:19:12', '0', '2025-11-21 00:03:01');
-INSERT INTO `purchasing` VALUES (3, 5, 3, 300000, '2025-11-20 23:19:21', '2', NULL);
+INSERT INTO `purchasing` VALUES (1, 1, 10, 300000, '2025-11-20 23:19:04', '2', '2025-11-22 11:16:29');
+INSERT INTO `purchasing` VALUES (2, 5, 10, 300000, '2025-11-20 23:19:12', '2', '2025-11-21 00:03:01');
+INSERT INTO `purchasing` VALUES (3, 5, 3, 300000, '2025-11-20 23:19:21', '2', '2025-11-21 11:16:37');
 INSERT INTO `purchasing` VALUES (4, 5, 7, 300000, '2025-11-20 23:19:27', '1', NULL);
 INSERT INTO `purchasing` VALUES (5, 3, 1, 300000, '2025-11-20 23:19:34', '1', NULL);
 INSERT INTO `purchasing` VALUES (6, 3, 3, 300000, '2025-11-20 23:19:37', '1', NULL);

@@ -11,6 +11,7 @@
                     <th>Jumlah</th>
                     <th>Harga Beli</th>
                     <th>Status</th>
+                    <th>tanggal batal pembelian</th>
                 </tr>
             </thead>
 
@@ -27,6 +28,8 @@
                     <td>Rp. ${purchasing.harga_beli.toLocaleString('id-ID')}</td>
                     <td>${purchasing.status == 0 ? 'Pending' : purchasing.status == 1 ? 'Dibeli' : purchasing.status ==
                         2 ? 'Dibatalkan' : 'Pending'}</td>
+                    <td>${purchasing.tanggal_batal_pembelian ? new Date(purchasing.tanggal_batal_pembelian).toLocaleString('id-ID', {weekday: 'long', year: 'numeric', month:
+                        'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '-'}</td>
                 </tr>`)
                 .join('')
                 }
