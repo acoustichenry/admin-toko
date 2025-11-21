@@ -39,7 +39,6 @@ A web application for managing products and purchasing operations.
 3. `GET /api/v1/purchasing/get-purchasing` - Get list of purchasing transactions
 4. `POST /api/v1/purchasing/create-purchasing` - Create a new purchasing transaction
 5. `PUT /api/v1/purchasing/update-purchasing` - Update a purchasing transaction
-6. `DELETE /api/v1/purchasing/delete-purchasing` - Delete a purchasing transaction
 
 ## Usage
 1. Navigate to the home page to view the list of products and purchasing transactions
