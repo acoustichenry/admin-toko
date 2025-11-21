@@ -6,8 +6,7 @@ A web application for managing products and purchasing operations.
 
 - View list of products with details (name, price, category, stock, description)
 - View list of purchasing transactions with details (id, product name, category, date, quantity, price, status)
-- Create new purchasing transactions
-- Update product stock levels   
+- Create new purchasing transactions  
 - Cancel purchasing transactions
 
 ## Technologies Used
