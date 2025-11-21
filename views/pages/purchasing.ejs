@@ -1,0 +1,35 @@
+<%- include('../layouts/main', { title: title, body: ` <h1>Daftar Pembelian</h1>
+
+    <ul>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID Pembelian</th>
+                    <th>Nama Produk</th>
+                    <th>Kategori</th>
+                    <th>Tanggal Pembelian</th>
+                    <th>Jumlah</th>
+                    <th>Harga Beli</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                ${purchasing
+                .map(purchasing => `
+                <tr>
+                    <td>${purchasing.id_pembelian}</td>
+                    <td>${purchasing.nama_produk}</td>
+                    <td>${purchasing.kategori}</td>
+                    <td>${new Date(purchasing.tanggal).toLocaleString('id-ID', {weekday: 'long', year: 'numeric', month:
+                        'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}</td>
+                    <td>${purchasing.jumlah}</td>
+                    <td>Rp. ${purchasing.harga_beli.toLocaleString('id-ID')}</td>
+                    <td>${purchasing.status == 0 ? 'Pending' : purchasing.status == 1 ? 'Dibeli' : purchasing.status ==
+                        2 ? 'Dibatalkan' : 'Pending'}</td>
+                </tr>`)
+                .join('')
+                }
+            </tbody>
+        </table>
+        ` }) %>

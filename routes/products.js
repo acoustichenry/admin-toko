@@ -3,27 +3,13 @@ const router = express.Router();
 const connection = require('../config/db');
 
 router.get('/get-product', (req, res) => {
-    connection.query('SELECT * FROM product order by id_produk desc', (err, rows) => {
+    connection.query('SELECT p.id_produk, p.nama_produk, p.harga, p.kategori, p.deskripsi, s.stok FROM product p JOIN product_stock s ON p.id_produk = s.id_produk order by p.id_produk desc', (err, rows) => {
         if (err) {
             return res.status(500).json({ message: 'Error fetching products' });
         }
-
-        res.status(200).json({ message: 'Products fetched successfully', data: rows });
+        return res.status(200).json({ message: 'Products fetched successfully', data: rows });
     });
 });
-
-router.post('/create-product', (req, res) => {
-    const { nama_produk, harga, kategori, deskripsi } = req.body;
-
-    connection.query('INSERT INTO product (nama_produk, harga, kategori, deskripsi) VALUES (?, ?, ?, ?)', [nama_produk, harga, kategori, deskripsi], (err, result) => {
-        if (err) {
-            return res.status(500).json({ message: 'Error creating product' });
-        }
-        res.status(200).json({ message: 'Product created successfully', data: req.body });
-    });
-});
-
-
 router.put('/update-stock-product/:id_produk', (req, res) => {
     const { stok = 0 } = req.body;
     const { id_produk } = req.params;    

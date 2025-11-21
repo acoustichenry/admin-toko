@@ -1,4 +1,4 @@
-<%- include('../layouts/main', { title: title, body: ` <h1>membuat Pembelian</h1>
+<%- include('../layouts/main', { title: title, body: ` <h1>Membuat Pembelian</h1>
 
     <form action="/purchasing/submit" method="POST" class="p-4 border rounded shadow-sm bg-white">
 
@@ -9,12 +9,12 @@
 
         <div class="mb-3">
             <label class="form-label">Price</label>
-            <input type="number" name="jumlah" class="form-control" placeholder="Enter price" required>
+            <input type="number" name="harga_beli" class="form-control" placeholder="Enter price" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Stock</label>
-            <input type="number" name="harga_beli" class="form-control" placeholder="Enter stock" required>
+            <label class="form-label">Jumlah</label>
+            <input type="number" name="jumlah" class="form-control" placeholder="Enter stock" required>
         </div>
 
         <button type="submit" class="btn btn-primary w-100">Save</button>

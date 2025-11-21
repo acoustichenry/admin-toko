@@ -1,3 +1,13 @@
+exports.getPurchasing = (req, res) => {
+    fetch('http://localhost:2727/api/v1/purchasing/get-purchasing')
+        .then(response => response.json())
+        .then(data => {
+            res.render('pages/purchasing', { title: "Purchasing List", purchasing: data.data });
+        });
+}
+
+
+
 exports.createPurchasing = (req, res) => {
     res.render('pages/createPurchasing', {
         title: 'create purchasing'
@@ -26,7 +36,7 @@ exports.submitPurchasing = async (req, res) => {
         console.log("API RESULT:", result);
 
         // After success, redirect to list page
-        res.redirect('/products/list');
+        res.redirect('/purchasing/list');
 
     } catch (error) {
         console.error(error);

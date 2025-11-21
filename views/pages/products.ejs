@@ -6,8 +6,9 @@
                 <tr>
                     <th>Nama Produk</th>
                     <th>Harga</th>
+                    <th>Kategori</th>
+                    <th>Stok</th>
                     <th>Deskripsi</th>
-                    <th>Aksi</th>
                 </tr>
             </thead>
         
@@ -17,12 +18,9 @@
             <tr>
                 <td>${product.nama_produk}</td>
                 <td>Rp. ${product.harga.toLocaleString('id-ID')}</td>
+                <td>${product.kategori}</td>
+                <td>${product.stok}</td>
                 <td>${product.deskripsi}</td>
-                <td>
-                    <a href="/products/edit/${product.id_produk}">Edit</a> 
-                    | 
-                    <a href="/products/delete/${product.id_produk}">Delete</a>
-                </td>
             </tr>`)
             .join('')
             }
